@@ -58,6 +58,28 @@ function formatDate(date) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function displayForecast(response) {
+  let forecastElement = document.querySelector("#forecast");
+
+  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+  let forecastHtml = "";
+
+  days.forEach(function (day) {
+    forecastHtml =
+      forecastHtml +
+      `<div class="forcast-day">
+            <div class="forecast-date">${day}</div>
+            <div class="forecast-icon">🌤️</div>
+            <div class="forecast-temperatures">
+              <div class="forecast-temperature"><strong>15°</strong></div>
+              <div class="forecast-temperature">9°</div>
+            </div>
+          </div>`;
+  });
+
+  forecastElement.innerHTML = forecastHtml;
+}
+
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSearchSubmit);
 
@@ -66,3 +88,5 @@ let currentDate = new Date();
 
 currentDateELement.innerHTML = formatDate(currentDate);
 search("Frankfurt");
+
+displayForecast();
