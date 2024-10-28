@@ -17,6 +17,8 @@ function displayInfo(response) {
   let date = new Date(response.data.time * 1000);
   let timeElement = document.querySelector("#current-date");
   timeElement.innerHTML = formatDate(date);
+
+  getForecast(response.data.city);
 }
 
 function search(city) {
@@ -80,6 +82,13 @@ function displayForecast(response) {
   forecastElement.innerHTML = forecastHtml;
 }
 
+function getForecast(city) {
+  let apiKey = "1f653d7bc9et5d03b45aa0oc41f43bec";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+
+  axios(apiUrl).then(displayForecast);
+}
+
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSearchSubmit);
 
@@ -88,5 +97,3 @@ let currentDate = new Date();
 
 currentDateELement.innerHTML = formatDate(currentDate);
 search("Frankfurt");
-
-displayForecast();
